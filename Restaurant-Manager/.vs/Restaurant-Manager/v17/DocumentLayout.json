@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\Restaurant-Manager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Restaurant-Manager.cpp",
+              "DocumentMoniker": "D:\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager.cpp",
+              "RelativeDocumentMoniker": "Restaurant-Manager\\Restaurant-Manager.cpp",
+              "ToolTip": "D:\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager.cpp",
+              "RelativeToolTip": "Restaurant-Manager\\Restaurant-Manager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-27T10:28:30.607Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
