@@ -1,7 +1,8 @@
 #include <iostream>
+#include "UI.h"
 
-int main()
-{
+using namespace std;
 
+int main() {
+    runUI();
 }
-

@@ -9,7 +9,9 @@ using namespace std;
 int loadRecipes(const char* filename, Recipe recipes[], int maxRecipes) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << "Cannot open file " << filename << " for recipes.\n";
+        cout << "Recipe file \"" << filename << "\" not found. Creating a new file.\n";
+        ofstream newFile(filename);
+        newFile.close();
         return 0;
     }
     int count = 0;

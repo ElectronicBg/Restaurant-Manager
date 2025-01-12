@@ -8,7 +8,9 @@ using namespace std;
 int loadMenu(const char* filename, MenuItem menu[], int maxMenuItems) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << "Cannot open file " << filename << " for menu.\n";
+        cout << "Menu file \"" << filename << "\" not found. Creating a new file.\n";
+        ofstream newFile(filename);
+        newFile.close();
         return 0;
     }
     int count = 0;
@@ -73,9 +75,10 @@ bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipe
 
 
     menu[menuCount++] = newItem;
-
-
     recipes[recipeCount++] = newRecipe;
+
+    saveMenu("menu.txt", menu, menuCount);
+    saveRecipes("recipes.txt", recipes, recipeCount);
 
     cout << "The new item \"" << newItem.name << "\" was successfully added to the menu.\n";
     return true;

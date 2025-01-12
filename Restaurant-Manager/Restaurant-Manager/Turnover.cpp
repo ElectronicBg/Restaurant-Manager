@@ -8,7 +8,9 @@ using namespace std;
 int loadTurnover(const char* filename, DailyTurnover turnovers[], int maxTurnovers) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << "Unable to open file " << filename << " for turnover.\n";
+        cout << "Turnover file \"" << filename << "\" not found. Creating a new file.\n";
+        ofstream newFile(filename);
+        newFile.close();
         return 0;
     }
     int count = 0;
