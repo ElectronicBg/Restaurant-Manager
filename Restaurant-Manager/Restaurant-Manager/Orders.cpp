@@ -6,9 +6,9 @@
 using namespace std;
 
 int loadOrders(const char* filename, Order orders[], int maxOrders) {
-    std::ifstream file(filename);
+    ifstream file(filename);
     if (!file.is_open()) {
-        std::cout << "Unable to open file " << filename << " for orders.\n";
+        cout << "Unable to open file " << filename << " for orders.\n";
         return 0;
     }
     int count = 0;
@@ -28,9 +28,9 @@ int loadOrders(const char* filename, Order orders[], int maxOrders) {
 }
 
 void saveOrders(const char* filename, Order orders[], int orderCount) {
-    std::ofstream file(filename);
+    ofstream file(filename);
     if (!file.is_open()) {
-        std::cout << "Unable to open file " << filename << " for saving orders.\n";
+        cout << "Unable to open file " << filename << " for saving orders.\n";
         return;
     }
     for (int i = 0; i < orderCount; i++) {
@@ -54,7 +54,7 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
         }
     }
     if (menuIndex == -1) {
-        std::cout << "Item \"" << itemName << "\" not found in the menu.\n";
+        cout << "Item \"" << itemName << "\" not found in the menu.\n";
         return false;
     }
 
@@ -66,12 +66,12 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
         }
     }
     if (recipeIndex == -1) {
-        std::cout << "Recipe for \"" << itemName << "\" not found.\n";
+        cout << "Recipe for \"" << itemName << "\" not found.\n";
         return false;
     }
 
     if (!canPrepareItem(recipes[recipeIndex], quantity, inventory, inventoryCount)) {
-        std::cout << "Insufficient stock to prepare \"" << itemName << "\".\n";
+        cout << "Insufficient stock to prepare \"" << itemName << "\".\n";
         return false;
     }
 
@@ -84,21 +84,21 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
     orders[orderCount].totalPrice = menu[menuIndex].price * quantity;
     orderCount++;
 
-    std::cout << "Order for \"" << itemName << "\" added successfully.\n";
+    cout << "Order for \"" << itemName << "\" added successfully.\n";
     return true;
 }
 
 void displayOrders(const Order orders[], int orderCount) {
-    std::cout << "\nOrders:\n";
-    std::cout << "ID\tDate\t\tItem\t\tQuantity\tTotal Price\n";
+    cout << "\nOrders:\n";
+    cout << "ID\tDate\t\tItem\t\tQuantity\tTotal Price\n";
     for (int i = 0; i < orderCount; i++) {
-        std::cout << orders[i].orderId << "\t"
+        cout << orders[i].orderId << "\t"
             << orders[i].date << "\t"
             << orders[i].itemName << "\t\t"
             << orders[i].quantity << "\t\t"
             << orders[i].totalPrice << " BGN\n";
     }
-    std::cout << "\n";
+    cout << "\n";
 }
 
 void displaySortedOrders(const Order orders[], int orderCount) {
