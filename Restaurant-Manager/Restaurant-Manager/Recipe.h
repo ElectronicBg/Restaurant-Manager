@@ -1,10 +1,8 @@
 #ifndef RECIPE_H
 #define RECIPE_H
 
-#define MAX_NAME_LENGTH 50
-#define MAX_RECIPE_INGREDIENTS 10
+#include "Globals.h"
 
-// Структура за Рецепта
 struct Recipe {
     char itemName[MAX_NAME_LENGTH];
     int numIngredients;

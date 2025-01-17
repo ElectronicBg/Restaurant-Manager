@@ -7,11 +7,15 @@ using namespace std;
 
 int loadOrders(const char* filename, Order orders[], int maxOrders) {
     ifstream file(filename);
-    if (!file.is_open()) {
-        cout << "Unable to open file " << filename << " for orders.\n";
+   if (!file.is_open()) {
+        cout << "Orders file \"" << filename << "\" not found. Creating a new file.\n";
+        ofstream newFile(filename);
+        newFile.close();
         return 0;
     }
+
     int count = 0;
+
     while (file >> orders[count].orderId) {
         file.ignore();
         file.getline(orders[count].date, MAX_DATE_LENGTH, ',');
@@ -46,7 +50,20 @@ void saveOrders(const char* filename, Order orders[], int orderCount) {
 bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* date,
     const char* itemName, int quantity, MenuItem menu[], int menuCount,
     Recipe recipes[], int recipeCount, InventoryItem inventory[], int inventoryCount) {
+
+    if (orderCount >= MAX_ORDERS) {
+        std::cout << "Order list is full. Cannot add a new order.\n";
+        return false;
+    }
+
+    if (orderCount > 0) {
+        nextOrderId = orders[orderCount - 1].orderId + 1;
+    }
+    else {
+        nextOrderId = 1; 
+    }
     int menuIndex = -1;
+
     for (int i = 0; i < menuCount; i++) {
         if (strcmp(menu[i].name, itemName) == 0) {
             menuIndex = i;
@@ -77,7 +94,7 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
 
     deductIngredients(recipes[recipeIndex], quantity, inventory, inventoryCount);
 
-    orders[orderCount].orderId = nextOrderId++;
+    orders[orderCount].orderId = nextOrderId;
     strcpy_s(orders[orderCount].date, date);
     strcpy_s(orders[orderCount].itemName, itemName);
     orders[orderCount].quantity = quantity;

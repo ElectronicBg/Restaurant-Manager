@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Orders.h"
 
 using namespace std;
 
@@ -35,14 +36,16 @@ void saveTurnover(const char* filename, DailyTurnover turnovers[], int turnoverC
     file.close();
 }
 
-void displayDailyTurnover(DailyTurnover turnovers[], int turnoverCount, const char* date) {
-    for (int i = 0; i < turnoverCount; i++) {
-        if (strcmp(turnovers[i].date, date) == 0) {
-            cout << "Turnover for " << date << ": " << turnovers[i].turnover << " BGN\n";
-            return;
+void displayDailyTurnover(Order orders[], int orderCount, const char* date) {
+    double totalTurnover = 0.0;
+
+    for (int i = 0; i < orderCount; i++) {
+        if (strcmp(orders[i].date, date) == 0) {
+            totalTurnover += orders[i].totalPrice;
         }
     }
-    cout << "No turnover found for date: " << date << "\n";
+
+    cout << "Turnover for " << date << ": " << totalTurnover << " BGN\n";
 }
 
 double getTurnoverForPeriod(DailyTurnover turnovers[], int turnoverCount, const char* startDate, const char* endDate) {
@@ -67,14 +70,39 @@ double resetDailyTurnover(DailyTurnover turnovers[], int& turnoverCount, const c
     return 0.0;
 }
 
-void generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, const char* date) {
-    double dailyTurnover = resetDailyTurnover(turnovers, turnoverCount, date);
+double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, const char* date,
+    Order orders[], int orderCount) {
+    double dailyTurnover = 0.0;
+
+    for (int i = 0; i < orderCount; i++) {
+        if (strcmp(orders[i].date, date) == 0) {
+            dailyTurnover += orders[i].totalPrice;
+        }
+    }
+
+    bool found = false;
+    for (int i = 0; i < turnoverCount; i++) {
+        if (strcmp(turnovers[i].date, date) == 0) {
+            turnovers[i].turnover = dailyTurnover;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        strcpy_s(turnovers[turnoverCount].date, date);
+        turnovers[turnoverCount].turnover = dailyTurnover;
+        turnoverCount++;
+    }
+
     if (dailyTurnover > 0.0) {
-        cout << "Daily report for " << date << ": " << dailyTurnover << " BGN\n";
+        std::cout << "Daily report for " << date << ": " << dailyTurnover << " BGN\n";
     }
     else {
-        cout << "No turnover to report for " << date << ".\n";
+        std::cout << "No orders found for " << date << ".\n";
     }
+
+    return dailyTurnover;
 }
 
 void displayTurnoverFromDate(DailyTurnover turnovers[], int turnoverCount, const char* startDate) {

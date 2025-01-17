@@ -2,8 +2,7 @@
 #define MENU_H
 
 #include "Recipe.h"
-
-#define MAX_MENU_ITEMS 100
+#include "Globals.h"
 
 struct MenuItem {
     int id;                    

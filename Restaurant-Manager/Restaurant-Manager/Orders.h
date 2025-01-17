@@ -4,10 +4,7 @@
 #include "Menu.h"
 #include "Recipe.h" 
 #include "Inventory.h"
-
-
-#define MAX_ORDERS 1000
-#define MAX_DATE_LENGTH 11
+#include "Globals.h"
 
 struct Order {
     int orderId;

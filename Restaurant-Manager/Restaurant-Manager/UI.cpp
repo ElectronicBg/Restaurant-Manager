@@ -1,6 +1,7 @@
 #include "UI.h"
 #include <iostream>
 #include <string>
+#include "Helper.h"
 
 using namespace std;
 
@@ -31,6 +32,18 @@ void runUI() {
     inventoryCount = loadInventory("inventory.txt", inventory, MAX_INVENTORY_ITEMS);
     orderCount = loadOrders("orders.txt", orders, MAX_ORDERS);
     turnoverCount = loadTurnover("turnover.txt", turnovers, MAX_TURNOVERS);
+
+    if (turnoverCount > 0) {
+
+        char lastTurnoverDate[MAX_DATE_LENGTH];
+        strcpy_s(lastTurnoverDate, turnovers[turnoverCount - 1].date);
+
+        incrementDate(lastTurnoverDate);
+
+        strcpy_s(currentDate, lastTurnoverDate);
+    }
+
+    cout << "Starting the system with date: " << currentDate << endl;
 
     int userType = 0;
     while (true) {
@@ -84,13 +97,22 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
         case 2: {
             char itemName[MAX_NAME_LENGTH];
             int quantity;
+
             cout << "Enter item name: ";
             cin.getline(itemName, MAX_NAME_LENGTH);
             cout << "Enter quantity: ";
             cin >> quantity;
             cin.ignore(10000, '\n');
-            addOrder(orders, orderCount, nextOrderId, currentDate, itemName, quantity, menu, menuCount,
-                nullptr, 0, nullptr, 0);
+
+            if (addOrder(orders, orderCount, nextOrderId, currentDate, itemName, quantity, menu, menuCount,
+                nullptr, 0, nullptr, 0)) {
+                cout << "Order added successfully.\n";
+                saveOrders("orders.txt", orders, orderCount);
+
+            }
+            else {
+                cout << "Failed to add order.\n";
+            }
             break;
         }
         case 3:
@@ -103,7 +125,7 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
             displaySortedOrders(orders, orderCount);
             break;
         case 6:
-            displayDailyTurnover(turnovers, turnoverCount, currentDate);
+            displayDailyTurnover(orders, turnoverCount, currentDate);
             break;
         case 7:
             displayAllOptions("Waiter");
@@ -184,10 +206,11 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
             break;
         }
         case 9:
-            displayDailyTurnover(turnovers, turnoverCount, currentDate);
-            break;
+            displayDailyTurnover(orders, orderCount, currentDate);
+            break;;
         case 10:
-            generateDailyReport(turnovers, turnoverCount, currentDate);
+            generateDailyReport(turnovers, turnoverCount, currentDate, orders, orderCount);
+            saveTurnover("turnover.txt", turnovers, turnoverCount);
             break;
         case 11: {
             char startDate[MAX_DATE_LENGTH];
@@ -201,9 +224,6 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
             break;
         case 13:
             cout << "Remove menu item is not implemented yet.\n";
-            break;
-        case 14:
-            displayAllOptions("Manager");
             break;
         default:
             cout << "Invalid option. Please try again.\n";
@@ -219,7 +239,6 @@ void displayAllOptions(const char* userType) {
         cout << "4. View past orders\n";
         cout << "5. View past orders sorted alphabetically\n";
         cout << "6. View daily turnover\n";
-        cout << "7. Show all options\n";
         cout << "0. Exit to main menu\n";
     }
     else if (strcmp(userType, "Manager") == 0) {
@@ -236,7 +255,6 @@ void displayAllOptions(const char* userType) {
         cout << "11. View turnover from a specific date\n";
         cout << "12. Add a new menu item\n";
         cout << "13. Remove a menu item\n";
-        cout << "14. Show all options\n";
         cout << "0. Exit to main menu\n";
     }
 }

@@ -8,7 +8,9 @@ using namespace std;
 int loadInventory(const char* filename, InventoryItem inventory[], int maxItems) {
     ifstream file(filename);
     if (!file.is_open()) {
-        cout << "Cannot open file " << filename << " for inventory.\n";
+        cout << "Inventory file \"" << filename << "\" not found. Creating a new file.\n";
+        ofstream newFile(filename);
+        newFile.close();
         return 0;
     }
     int count = 0;

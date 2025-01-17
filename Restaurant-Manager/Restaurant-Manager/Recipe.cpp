@@ -60,6 +60,7 @@ void deductIngredients(const Recipe& recipe, int quantity, InventoryItem invento
             }
         }
     }
+    saveInventory("inventory.txt", inventory, inventoryCount);
 }
 
 void saveRecipes(const char* filename, Recipe recipes[], int recipeCount) {
