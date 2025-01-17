@@ -1,18 +1,10 @@
 #include "UI.h"
+#include "DateManager.h"
+
 #include <iostream>
 #include <string>
-#include "Helper.h"
 
 using namespace std;
-
-void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount, int& nextOrderId,
-    DailyTurnover turnovers[], int& turnoverCount, const char* currentDate);
-
-void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCount, int& nextOrderId,
-    Recipe recipes[], int& recipeCount, InventoryItem inventory[], int& inventoryCount,
-    DailyTurnover turnovers[], int& turnoverCount, const char* currentDate);
-
-void displayAllOptions(const char* userType);
 
 void runUI() {
 
@@ -25,23 +17,14 @@ void runUI() {
     int menuCount = 0, recipeCount = 0, inventoryCount = 0, orderCount = 0, turnoverCount = 0;
     int nextOrderId = 1;
 
-    char currentDate[MAX_DATE_LENGTH] = "2025-01-01";
+    char currentDate[MAX_DATE_LENGTH];
+    loadCurrentDate(currentDate, "current_date.txt");
 
     menuCount = loadMenu("menu.txt", menu, MAX_MENU_ITEMS);
     recipeCount = loadRecipes("recipes.txt", recipes, MAX_MENU_ITEMS);
     inventoryCount = loadInventory("inventory.txt", inventory, MAX_INVENTORY_ITEMS);
     orderCount = loadOrders("orders.txt", orders, MAX_ORDERS);
     turnoverCount = loadTurnover("turnover.txt", turnovers, MAX_TURNOVERS);
-
-    if (turnoverCount > 0) {
-
-        char lastTurnoverDate[MAX_DATE_LENGTH];
-        strcpy_s(lastTurnoverDate, turnovers[turnoverCount - 1].date);
-
-        incrementDate(lastTurnoverDate);
-
-        strcpy_s(currentDate, lastTurnoverDate);
-    }
 
     cout << "Starting the system with date: " << currentDate << endl;
 
@@ -138,7 +121,7 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
 
 void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCount, int& nextOrderId,
     Recipe recipes[], int& recipeCount, InventoryItem inventory[], int& inventoryCount,
-    DailyTurnover turnovers[], int& turnoverCount, const char* currentDate) {
+    DailyTurnover turnovers[], int& turnoverCount, char* currentDate) {
     int option;
     while (true) {
         cout << "\n--- Manager Menu ---\n";
@@ -209,8 +192,7 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
             displayDailyTurnover(orders, orderCount, currentDate);
             break;;
         case 10:
-            generateDailyReport(turnovers, turnoverCount, currentDate, orders, orderCount);
-            saveTurnover("turnover.txt", turnovers, turnoverCount);
+            generateDailyReport(turnovers, turnoverCount, currentDate, orders, orderCount, "turnover.txt");
             break;
         case 11: {
             char startDate[MAX_DATE_LENGTH];

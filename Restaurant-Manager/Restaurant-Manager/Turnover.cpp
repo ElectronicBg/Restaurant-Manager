@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "Orders.h"
+#include "DateManager.h"
 
 using namespace std;
 
@@ -70,37 +71,45 @@ double resetDailyTurnover(DailyTurnover turnovers[], int& turnoverCount, const c
     return 0.0;
 }
 
-double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, const char* date,
-    Order orders[], int orderCount) {
+double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, char* currentDate,
+    Order orders[], int orderCount, const char* filename) {
     double dailyTurnover = 0.0;
 
     for (int i = 0; i < orderCount; i++) {
-        if (strcmp(orders[i].date, date) == 0) {
+        if (strcmp(orders[i].date, currentDate) == 0) {
             dailyTurnover += orders[i].totalPrice;
         }
     }
 
     bool found = false;
     for (int i = 0; i < turnoverCount; i++) {
-        if (strcmp(turnovers[i].date, date) == 0) {
+        if (strcmp(turnovers[i].date, currentDate) == 0) {
             turnovers[i].turnover = dailyTurnover;
             found = true;
             break;
         }
     }
 
-    if (!found) {
-        strcpy_s(turnovers[turnoverCount].date, date);
+    if (!found && turnoverCount < MAX_TURNOVERS) {
+        strcpy_s(turnovers[turnoverCount].date, MAX_DATE_LENGTH, currentDate);
         turnovers[turnoverCount].turnover = dailyTurnover;
         turnoverCount++;
     }
 
+    saveTurnover(filename, turnovers, turnoverCount);
+
     if (dailyTurnover > 0.0) {
-        std::cout << "Daily report for " << date << ": " << dailyTurnover << " BGN\n";
+        cout << "Daily report for " << currentDate << ": " << dailyTurnover << " BGN\n";
     }
     else {
-        std::cout << "No orders found for " << date << ".\n";
+        cout << "No orders found for " << currentDate << ".\n";
     }
+
+    incrementDate(currentDate);
+
+    saveCurrentDate(currentDate, "current_date.txt");
+
+    cout << "New working date set to: " << currentDate << endl;
 
     return dailyTurnover;
 }

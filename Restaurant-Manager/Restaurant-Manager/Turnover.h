@@ -20,8 +20,8 @@ double getTurnoverForPeriod(DailyTurnover turnovers[], int turnoverCount, const 
 
 double resetDailyTurnover(DailyTurnover turnovers[], int& turnoverCount, const char* date);
 
-double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, const char* date,
-    Order orders[], int orderCount);
+double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, char* currentDate,
+    Order orders[], int orderCount, const char* filename);
 
 void displayTurnoverFromDate(DailyTurnover turnovers[], int turnoverCount, const char* startDate);
 

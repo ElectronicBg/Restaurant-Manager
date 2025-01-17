@@ -1,4 +1,43 @@
-#include "Helper.h"
+#include "DateManager.h"
+
+#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void loadCurrentDate(char* date, const char* filename) {
+    ifstream file(filename);
+
+    if (!file.is_open()) {
+        cout << "No date file found. Initializing to 2025-01-01.\n";
+        strcpy_s(date, MAX_DATE_LENGTH, "2025-01-01");
+        saveCurrentDate(date, filename); 
+        return;
+    }
+
+
+    file.getline(date, MAX_DATE_LENGTH);
+
+
+    if (strlen(date) != 10) {
+        cout << "Invalid date format in file. Resetting to 2025-01-01.\n";
+        strcpy_s(date, MAX_DATE_LENGTH, "2025-01-01");
+        saveCurrentDate(date, filename);
+    }
+
+    file.close();
+}
+
+void saveCurrentDate(const char* date, const char* filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        cout << "Error saving date to file: " << filename << endl;
+        return;
+    }
+    file << date;
+    file.close();
+}
 
 void incrementDate(char* date) {
     int year, month, day;

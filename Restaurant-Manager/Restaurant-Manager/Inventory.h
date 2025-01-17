@@ -1,10 +1,7 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
+#include "Globals.h"
 
-#define MAX_NAME_LENGTH 50
-#define MAX_INVENTORY_ITEMS 100
-
-// Структура за склада
 struct InventoryItem {
     char name[MAX_NAME_LENGTH];
     int quantity;               
