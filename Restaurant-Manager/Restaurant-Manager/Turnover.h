@@ -1,8 +1,7 @@
-#ifndef TURNOVER_H
-#define TURNOVER_H
+#pragma once
 
 #include "Orders.h"
-#include "Globals.h"
+#include "Constants.h"
 
 struct DailyTurnover {
     char date[MAX_DATE_LENGTH];
@@ -24,7 +23,4 @@ double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, char* 
     Order orders[], int orderCount, const char* filename);
 
 void displayTurnoverFromDate(DailyTurnover turnovers[], int turnoverCount, const char* startDate);
-
-#endif
-
 

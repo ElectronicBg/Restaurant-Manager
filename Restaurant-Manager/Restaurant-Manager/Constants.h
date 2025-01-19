@@ -1,6 +1,4 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
-
+#pragma once
 
 #define MAX_NAME_LENGTH 50
 #define MAX_DATE_LENGTH 11
@@ -20,4 +18,6 @@
 // Turnover
 #define MAX_TURNOVERS 365
 
-#endif 
+//Validator
+#define MIN_OPTION 0
+#define MAX_OPTION 14

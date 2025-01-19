@@ -1,5 +1,6 @@
 #include "UI.h"
 #include "DateManager.h"
+#include "Validator.h"
 
 #include <iostream>
 #include <string>
@@ -66,12 +67,12 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
 	Recipe recipes[], int& recipeCount, InventoryItem inventory[], int& inventoryCount,
 	DailyTurnover turnovers[], int& turnoverCount, const char* currentDate) {
 	int option;
+
 	while (true) {
 		cout << "\n--- Waiter Menu ---\n";
 		displayAllOptions("Waiter");
-		cout << "Select an option: ";
-		cin >> option;
-		cin.ignore(10000, '\n');
+
+		validateMenuOption(option);
 
 		if (option == 0) break;
 
@@ -83,11 +84,8 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
 			char itemName[MAX_NAME_LENGTH];
 			int quantity;
 
-			cout << "Enter item name: ";
-			cin.getline(itemName, MAX_NAME_LENGTH);
-			cout << "Enter quantity: ";
-			cin >> quantity;
-			cin.ignore(10000, '\n');
+			validateStringInput(itemName, MAX_NAME_LENGTH, "Enter item name: ");
+			validatePositiveInt(quantity, "Enter quantity: ");
 
 			if (addOrder(orders, orderCount, nextOrderId, currentDate, itemName, quantity,
 				menu, menuCount, recipes, recipeCount, inventory, inventoryCount)) {
@@ -101,9 +99,7 @@ void waiterMenu(MenuItem menu[], int menuCount, Order orders[], int& orderCount,
 		}
 		case 3:
 			int orderId;
-			cout << "Enter the ID of the order you want to cancel: ";
-			cin >> orderId;
-			cin.ignore(10000, '\n');
+			validatePositiveInt(orderId, "Enter the ID of the order you want to cancel: ");
 
 			if (!cancelOrder(orders, orderCount, orderId, currentDate)) {
 				cout << "Failed to cancel the order.\n";
@@ -131,12 +127,12 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
 	Recipe recipes[], int& recipeCount, InventoryItem inventory[], int& inventoryCount,
 	DailyTurnover turnovers[], int& turnoverCount, char* currentDate) {
 	int option;
+
 	while (true) {
 		cout << "\n--- Manager Menu ---\n";
 		displayAllOptions("Manager");
-		cout << "Select an option: ";
-		cin >> option;
-		cin.ignore(10000, '\n');
+
+		validateMenuOption(option);
 
 		if (option == 0) break;
 
@@ -144,15 +140,13 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
 		case 1:
 			displayMenu(menu, menuCount);
 			break;
+
 		case 2: {
 			char itemName[MAX_NAME_LENGTH];
 			int quantity;
 
-			cout << "Enter item name: ";
-			cin.getline(itemName, MAX_NAME_LENGTH);
-			cout << "Enter quantity: ";
-			cin >> quantity;
-			cin.ignore(10000, '\n');
+			validateStringInput(itemName, MAX_NAME_LENGTH, "Enter item name: ");
+			validatePositiveInt(quantity, "Enter quantity: ");
 
 			if (addOrder(orders, orderCount, nextOrderId, currentDate, itemName, quantity,
 				menu, menuCount, recipes, recipeCount, inventory, inventoryCount)) {
@@ -164,42 +158,44 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
 			}
 			break;
 		}
-		case 3:
+
+		case 3: {
 			int orderId;
-			cout << "Enter the ID of the order you want to cancel: ";
-			cin >> orderId;
-			cin.ignore(10000, '\n');
+			validatePositiveInt(orderId, "Enter the ID of the order you want to cancel: ");
 
 			if (!cancelOrder(orders, orderCount, orderId, currentDate)) {
 				cout << "Failed to cancel the order.\n";
 			}
 			break;
+		}
+
 		case 4:
 			displayOrders(orders, orderCount);
 			break;
+
 		case 5:
 			displaySortedOrders(orders, orderCount);
 			break;
+
 		case 6: {
 			char itemName[MAX_NAME_LENGTH];
-			cout << "Enter the name of the product: ";
-			cin.getline(itemName, MAX_NAME_LENGTH);
+			validateStringInput(itemName, MAX_NAME_LENGTH, "Enter the name of the product: ");
 
 			int count = countOrdersForItemToday(orders, orderCount, currentDate, itemName);
 			cout << "The product \"" << itemName << "\" has been ordered " << count << " times today.\n";
 			break;
 		}
+
 		case 7:
 			displayInventory(inventory, inventoryCount);
 			break;
+
 		case 8: {
 			char productName[MAX_NAME_LENGTH];
 			int quantity;
-			cout << "Enter product name: ";
-			cin.getline(productName, MAX_NAME_LENGTH);
-			cout << "Enter quantity: ";
-			cin >> quantity;
-			cin.ignore(10000, '\n');
+			validateStringInput(productName, MAX_NAME_LENGTH, "Enter product name: ");
+			validatePositiveInt(quantity, "Enter quantity: ");
+
 			if (addToInventory(inventory, inventoryCount, productName, quantity)) {
 				cout << "Product \"" << productName << "\" added to inventory.\n";
 				saveInventory("inventory.txt", inventory, inventoryCount);
@@ -209,41 +205,68 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
 			}
 			break;
 		}
-		case 9:
+
+		case 9: {
+			char productName[MAX_NAME_LENGTH];
+			validateStringInput(productName, MAX_NAME_LENGTH, "Enter the name of the product to remove: ");
+
+			if (!removeFromInventory(inventory, inventoryCount, productName)) {
+				cout << "Failed to remove the product.\n";
+			}
+			break;
+		}
+
+		case 10:
 			displayDailyTurnover(orders, orderCount, currentDate);
 			break;
-		case 10:
+
+		case 11:
 			generateDailyReport(turnovers, turnoverCount, currentDate, orders, orderCount, "turnover.txt");
 			break;
-		case 11: {
+
+		case 12: {
 			char startDate[MAX_DATE_LENGTH];
-			cout << "Enter start date (YYYY-MM-DD): ";
-			cin.getline(startDate, MAX_DATE_LENGTH);
+			validateStringInput(startDate, MAX_DATE_LENGTH, "Enter start date (YYYY-MM-DD): ");
 			displayTurnoverFromDate(turnovers, turnoverCount, startDate);
 			break;
 		}
-		case 12:
-			addMenuItem(menu, menuCount, nextOrderId, recipes, recipeCount);
+
+		case 13: {
+			char itemName[MAX_NAME_LENGTH];
+			double price;
+			int numIngredients;
+			char ingredientNames[MAX_RECIPE_INGREDIENTS][MAX_NAME_LENGTH];
+			int ingredientQuantities[MAX_RECIPE_INGREDIENTS];
+
+			validateStringInput(itemName, MAX_NAME_LENGTH, "Enter the name of the new item: ");
+			validatePositiveDouble(price, "Enter the price of the item: ");
+			validatePositiveInt(numIngredients, "Enter the number of ingredients for the item: ");
+
+			if (numIngredients > MAX_RECIPE_INGREDIENTS) {
+				cout << "Too many ingredients. Maximum: " << MAX_RECIPE_INGREDIENTS << "\n";
+				break;
+			}
+
+			for (int i = 0; i < numIngredients; i++) {
+				validateStringInput(ingredientNames[i], MAX_NAME_LENGTH, ("Enter the name of ingredient " + to_string(i + 1) + ": ").c_str());
+				validatePositiveInt(ingredientQuantities[i], ("Enter the quantity for ingredient " + to_string(i + 1) + ": ").c_str());
+			}
+
+			int nextMenuId = (menuCount > 0) ? menu[menuCount - 1].id + 1 : 1;
+
+			addMenuItem(menu, menuCount, nextMenuId, recipes, recipeCount, itemName, price, numIngredients, ingredientNames, ingredientQuantities);
+
 			break;
-		case 13:
+		}
+		case 14: {
 			int idToDelete;
-			cout << "Enter the ID of the menu item to delete: ";
-			cin >> idToDelete;
-			cin.ignore(10000, '\n');
+			validatePositiveInt(idToDelete, "Enter the ID of the menu item to delete: ");
 
 			if (!deleteMenuItem(menu, menuCount, idToDelete, recipes, recipeCount)) {
 				cout << "Failed to delete menu item.\n";
 			}
 			break;
-		case 14: 
-			char productName[MAX_NAME_LENGTH];
-			cout << "Enter the name of the product to remove: ";
-			cin.getline(productName, MAX_NAME_LENGTH);
-
-			if (!removeFromInventory(inventory, inventoryCount, productName)) {
-				cout << "Failed to remove the product.\n";
-			}
-			break;		
+		}
 		default:
 			cout << "Invalid option. Please try again.\n";
 		}
@@ -269,12 +292,12 @@ void displayAllOptions(const char* userType) {
 		cout << "6. View past orders for a specific product\n";
 		cout << "7. View inventory levels\n";
 		cout << "8. Add products to inventory\n";
-		cout << "9. View daily turnover\n";
-		cout << "10. Generate daily report (reset turnover)\n";
-		cout << "11. View turnover from a specific date\n";
-		cout << "12. Add a new menu item\n";
-		cout << "13. Remove a menu item\n";
-		cout << "14. Remove item from inventory\n";
+		cout << "9. Remove item from inventory\n";
+		cout << "10. View daily turnover\n";
+		cout << "11. Generate daily report (reset turnover)\n";
+		cout << "12. View turnover from a specific date\n";
+		cout << "13. Add a new menu item\n";
+		cout << "14. Remove a menu item\n";
 		cout << "0. Exit to main menu\n";
 	}
 }

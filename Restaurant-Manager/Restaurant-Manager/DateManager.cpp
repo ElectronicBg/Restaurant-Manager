@@ -11,8 +11,10 @@ void loadCurrentDate(char* date, const char* filename) {
 
     if (!file.is_open()) {
         cout << "No date file found. Initializing to 2025-01-01.\n";
+
         strcpy_s(date, MAX_DATE_LENGTH, "2025-01-01");
         saveCurrentDate(date, filename); 
+
         return;
     }
 
@@ -22,6 +24,7 @@ void loadCurrentDate(char* date, const char* filename) {
 
     if (strlen(date) != 10) {
         cout << "Invalid date format in file. Resetting to 2025-01-01.\n";
+
         strcpy_s(date, MAX_DATE_LENGTH, "2025-01-01");
         saveCurrentDate(date, filename);
     }
@@ -31,8 +34,10 @@ void loadCurrentDate(char* date, const char* filename) {
 
 void saveCurrentDate(const char* date, const char* filename) {
     ofstream file(filename);
+
     if (!file.is_open()) {
         cout << "Error saving date to file: " << filename << endl;
+
         return;
     }
     file << date;
@@ -57,6 +62,7 @@ void incrementDate(char* date) {
     }
     else if (month == 2) { 
         bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+
         if ((isLeapYear && day > 29) || (!isLeapYear && day > 28)) {
             monthOverflow = true;
         }

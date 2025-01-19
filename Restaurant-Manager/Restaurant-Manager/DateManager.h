@@ -1,10 +1,9 @@
-#ifndef HELPER_H
-#define HELPER_H
+#pragma once
 
-#include "Globals.h"
+#include "Constants.h"
 
 void loadCurrentDate(char* date, const char* filename);
-void saveCurrentDate(const char* date, const char* filename);
-void incrementDate(char* date);
 
-#endif
+void saveCurrentDate(const char* date, const char* filename);
+
+void incrementDate(char* date);

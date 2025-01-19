@@ -1,5 +1,4 @@
-#ifndef UI_H
-#define UI_H
+#pragma once
 
 #include "Menu.h"
 #include "Orders.h"
@@ -17,4 +16,3 @@ void managerMenu(MenuItem menu[], int& menuCount, Order orders[], int& orderCoun
 	DailyTurnover turnovers[], int& turnoverCount, char* currentDate);
 
 void displayAllOptions(const char* userType);
-#endif

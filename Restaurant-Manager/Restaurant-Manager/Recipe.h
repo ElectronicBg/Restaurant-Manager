@@ -1,7 +1,6 @@
-#ifndef RECIPE_H
-#define RECIPE_H
+#pragma once
 
-#include "Globals.h"
+#include "Constants.h"
 
 struct Recipe {
     char itemName[MAX_NAME_LENGTH];
@@ -19,6 +18,3 @@ void deductIngredients(const Recipe& recipe, int quantity, struct InventoryItem 
 bool deleteRecipe(Recipe recipes[], int& recipeCount, const char* itemName);
 
 void saveRecipes(const char* filename, Recipe recipes[], int recipeCount);
-
-
-#endif

@@ -7,79 +7,73 @@ using namespace std;
 
 int loadMenu(const char* filename, MenuItem menu[], int maxMenuItems) {
     ifstream file(filename);
+
     if (!file.is_open()) {
         cout << "Menu file \"" << filename << "\" not found. Creating a new file.\n";
+
         ofstream newFile(filename);
         newFile.close();
+
         return 0;
     }
+
     int count = 0;
+
     while (file >> menu[count].id) {
         file.ignore();
         file.getline(menu[count].name, MAX_NAME_LENGTH, ',');
         file >> menu[count].price;
         file.ignore();
         count++;
-        if (count >= maxMenuItems) break;
+
+        if (count >= maxMenuItems) 
+            break;
     }
+
     file.close();
+
     return count;
 }
 
 void saveMenu(const char* filename, MenuItem menu[], int menuCount) {
     ofstream file(filename);
+
     if (!file.is_open()) {
         cout << "Cannot open file " << filename << " to save the menu.\n";
+
         return;
     }
     for (int i = 0; i < menuCount; i++) {
         file << menu[i].id << "," << menu[i].name << "," << menu[i].price << "\n";
     }
+
     file.close();
 }
 
-bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipes[], int& recipeCount) {
+bool addMenuItem(MenuItem menu[], int& menuCount, int nextMenuId, Recipe recipes[], int& recipeCount,
+    const char* itemName, double price, int numIngredients,
+    char ingredientNames[][MAX_NAME_LENGTH], int ingredientQuantities[]) {
+
     if (menuCount >= MAX_MENU_ITEMS) {
         cout << "The menu is full. Cannot add a new item.\n";
-        return false;
-    }
 
-    if (menuCount > 0) {
-        nextMenuId = menu[menuCount - 1].id + 1;
-    }
-    else {
-        nextMenuId = 1;
+        return false;
     }
 
     MenuItem newItem;
     Recipe newRecipe;
 
-    cout << "Enter the name of the new item: ";
-    cin.getline(newItem.name, MAX_NAME_LENGTH);
-    cout << "Enter the price of the item: ";
-    cin >> newItem.price;
-    cin.ignore(10000, '\n');
+    newItem.id = nextMenuId;
+    strcpy_s(newItem.name, MAX_NAME_LENGTH, itemName);
+    newItem.price = price;
 
-    newItem.id = nextMenuId++;
+    strcpy_s(newRecipe.itemName, MAX_NAME_LENGTH, itemName);
+    newRecipe.numIngredients = numIngredients;
 
-    strcpy_s(newRecipe.itemName, newItem.name);
-    cout << "Enter the number of ingredients for the item: ";
-    cin >> newRecipe.numIngredients;
-    cin.ignore(10000, '\n');
-
-    if (newRecipe.numIngredients > MAX_RECIPE_INGREDIENTS) {
-        cout << "Too many ingredients. Maximum: " << MAX_RECIPE_INGREDIENTS << "\n";
-        return false;
+    for (int i = 0; i < numIngredients; i++) {
+        strcpy_s(newRecipe.ingredientNames[i], MAX_NAME_LENGTH, ingredientNames[i]);
+        newRecipe.ingredientQuantities[i] = ingredientQuantities[i];
     }
-
-    for (int i = 0; i < newRecipe.numIngredients; i++) {
-        cout << "Enter the name of ingredient " << i + 1 << ": ";
-        cin.getline(newRecipe.ingredientNames[i], MAX_NAME_LENGTH);
-        cout << "Enter the quantity for ingredient " << i + 1 << ": ";
-        cin >> newRecipe.ingredientQuantities[i];
-        cin.ignore(10000, '\n');
-    }
-
 
     menu[menuCount++] = newItem;
     recipes[recipeCount++] = newRecipe;
@@ -88,11 +82,14 @@ bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipe
     saveRecipes("recipes.txt", recipes, recipeCount);
 
     cout << "The new item \"" << newItem.name << "\" was successfully added to the menu.\n";
+
     return true;
 }
+
 bool deleteMenuItem(MenuItem menu[], int& menuCount, int idToDelete, Recipe recipes[], int& recipeCount) {
     if (menuCount == 0) {
         cout << "The menu is empty. No items to delete.\n";
+
         return false;
     }
 
@@ -101,12 +98,14 @@ bool deleteMenuItem(MenuItem menu[], int& menuCount, int idToDelete, Recipe reci
     for (int i = 0; i < menuCount; i++) {
         if (menu[i].id == idToDelete) {
             index = i;
+
             break;
         }
     }
 
     if (index == -1) {
         cout << "Menu item with ID " << idToDelete << " not found.\n";
+
         return false;
     }
 
@@ -126,12 +125,14 @@ bool deleteMenuItem(MenuItem menu[], int& menuCount, int idToDelete, Recipe reci
     saveMenu("menu.txt", menu, menuCount);
 
     cout << "Menu item with ID " << idToDelete << " and its corresponding recipe were successfully deleted.\n";
+
     return true;
 }
 
 void displayMenu(MenuItem menu[], int menuCount) {
     cout << "\nMenu:\n";
     cout << "ID\tName\t\tPrice\n";
+
     for (int i = 0; i < menuCount; i++) {
         cout << menu[i].id << "\t" << menu[i].name << "\t\t" << menu[i].price << " lv.\n";
     }

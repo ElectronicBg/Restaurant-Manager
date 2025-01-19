@@ -11,26 +11,36 @@ using namespace std;
 
 int loadTurnover(const char* filename, DailyTurnover turnovers[], int maxTurnovers) {
     ifstream file(filename);
+
     if (!file.is_open()) {
         cout << "Turnover file \"" << filename << "\" not found. Creating a new file.\n";
+
         ofstream newFile(filename);
         newFile.close();
+
         return 0;
     }
+
     int count = 0;
+
     while (file.getline(turnovers[count].date, MAX_DATE_LENGTH, ',') && file >> turnovers[count].turnover) {
         file.ignore();
         count++;
-        if (count >= maxTurnovers) break;
+        if (count >= maxTurnovers) 
+            break;
     }
+
     file.close();
+
     return count;
 }
 
 void saveTurnover(const char* filename, DailyTurnover turnovers[], int turnoverCount) {
     ofstream file(filename);
+
     if (!file.is_open()) {
         cout << "Unable to open file " << filename << " for saving turnover.\n";
+
         return;
     }
     for (int i = 0; i < turnoverCount; i++) {
@@ -53,6 +63,7 @@ void displayDailyTurnover(Order orders[], int orderCount, const char* date) {
 
 double getTurnoverForPeriod(DailyTurnover turnovers[], int turnoverCount, const char* startDate, const char* endDate) {
     double total = 0.0;
+
     for (int i = 0; i < turnoverCount; i++) {
         if (strcmp(turnovers[i].date, startDate) >= 0 && strcmp(turnovers[i].date, endDate) <= 0) {
             total += turnovers[i].turnover;
@@ -65,11 +76,14 @@ double resetDailyTurnover(DailyTurnover turnovers[], int& turnoverCount, const c
     for (int i = 0; i < turnoverCount; i++) {
         if (strcmp(turnovers[i].date, date) == 0) {
             double dailyTurnover = turnovers[i].turnover;
+
             turnovers[i].turnover = 0.0; 
+
             return dailyTurnover;
         }
     }
     cout << "No turnover found for date: " << date << "\n";
+
     return 0.0;
 }
 
@@ -88,6 +102,7 @@ double generateDailyReport(DailyTurnover turnovers[], int& turnoverCount, char* 
         if (strcmp(turnovers[i].date, currentDate) == 0) {
             turnovers[i].turnover = dailyTurnover;
             found = true;
+
             break;
         }
     }
