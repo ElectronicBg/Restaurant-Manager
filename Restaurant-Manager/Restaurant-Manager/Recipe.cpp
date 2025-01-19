@@ -1,5 +1,6 @@
 #include "Recipe.h"
 #include "Inventory.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -61,6 +62,39 @@ void deductIngredients(const Recipe& recipe, int quantity, InventoryItem invento
         }
     }
     saveInventory("inventory.txt", inventory, inventoryCount);
+}
+
+bool deleteRecipe(Recipe recipes[], int& recipeCount, const char* itemName) {
+    if (recipeCount == 0) {
+        cout << "No recipes to delete.\n";
+        return false;
+    }
+
+    int index = -1;
+
+    for (int i = 0; i < recipeCount; i++) {
+        if (strcmp(recipes[i].itemName, itemName) == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Recipe for \"" << itemName << "\" not found.\n";
+        return false;
+    }
+
+    cout << "Deleting recipe for: " << itemName << "\n";
+
+    for (int i = index; i < recipeCount - 1; i++) {
+        recipes[i] = recipes[i + 1];
+    }
+    recipeCount--;
+
+    saveRecipes("recipes.txt", recipes, recipeCount);
+
+    cout << "Recipe for \"" << itemName << "\" was successfully deleted.\n";
+    return true;
 }
 
 void saveRecipes(const char* filename, Recipe recipes[], int recipeCount) {

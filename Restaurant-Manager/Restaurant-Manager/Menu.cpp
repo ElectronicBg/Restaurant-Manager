@@ -44,6 +44,13 @@ bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipe
         return false;
     }
 
+    if (menuCount > 0) {
+        nextMenuId = menu[menuCount - 1].id + 1;
+    }
+    else {
+        nextMenuId = 1;
+    }
+
     MenuItem newItem;
     Recipe newRecipe;
 
@@ -81,6 +88,44 @@ bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipe
     saveRecipes("recipes.txt", recipes, recipeCount);
 
     cout << "The new item \"" << newItem.name << "\" was successfully added to the menu.\n";
+    return true;
+}
+bool deleteMenuItem(MenuItem menu[], int& menuCount, int idToDelete, Recipe recipes[], int& recipeCount) {
+    if (menuCount == 0) {
+        cout << "The menu is empty. No items to delete.\n";
+        return false;
+    }
+
+    int index = -1;
+
+    for (int i = 0; i < menuCount; i++) {
+        if (menu[i].id == idToDelete) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Menu item with ID " << idToDelete << " not found.\n";
+        return false;
+    }
+
+    cout << "Deleting menu item: " << menu[index].name << "\n";
+
+    char itemName[MAX_NAME_LENGTH];
+    strcpy_s(itemName, MAX_NAME_LENGTH, menu[index].name);
+
+
+    for (int i = index; i < menuCount - 1; i++) {
+        menu[i] = menu[i + 1];
+    }
+    menuCount--; 
+
+    deleteRecipe(recipes, recipeCount, itemName);
+
+    saveMenu("menu.txt", menu, menuCount);
+
+    cout << "Menu item with ID " << idToDelete << " and its corresponding recipe were successfully deleted.\n";
     return true;
 }
 

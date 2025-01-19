@@ -77,20 +77,42 @@ bool addToInventory(InventoryItem inventory[], int& itemCount, const char* produ
     cout << "The inventory is full. Cannot add a new product.\n";
     return false;
 }
+bool removeFromInventory(InventoryItem inventory[], int& itemCount, const char* productName) {
+    if (itemCount == 0) {
+        cout << "The inventory is empty. No products to remove.\n";
+        return false;
+    }
 
-void displayMinimalInventory(const InventoryItem inventory[], int itemCount, int minimalQuantity) {
-    cout << "\nProducts with quantity below " << minimalQuantity << ":\n";
+    int index = -1;
+
     for (int i = 0; i < itemCount; i++) {
-        if (inventory[i].quantity < minimalQuantity) {
-            cout << inventory[i].name << ": " << inventory[i].quantity << "\n";
+        if (strcmp(inventory[i].name, productName) == 0) {
+            index = i;
+            break;
         }
     }
-    cout << "\n";
+
+    if (index == -1) {
+        cout << "Product \"" << productName << "\" not found in the inventory.\n";
+        return false;
+    }
+
+    cout << "Removing product: " << inventory[index].name << "\n";
+
+    for (int i = index; i < itemCount - 1; i++) {
+        inventory[i] = inventory[i + 1];
+    }
+    itemCount--;
+
+    saveInventory("inventory.txt", inventory, itemCount);
+
+    cout << "Product \"" << productName << "\" has been successfully removed from the inventory.\n";
+    return true;
 }
 
 void displayInventory(const InventoryItem inventory[], int itemCount) {
     cout << "\nInventory:\n";
-    cout << "Product\t\tQuantity\n";
+    cout << "Product:\t\tQuantity:\n";
     for (int i = 0; i < itemCount; i++) {
         cout << inventory[i].name << "\t\t" << inventory[i].quantity << "\n";
     }

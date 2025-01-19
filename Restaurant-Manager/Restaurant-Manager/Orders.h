@@ -22,10 +22,12 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
     const char* itemName, int quantity, MenuItem menu[], int menuCount,
     Recipe recipes[], int recipeCount, InventoryItem inventory[], int inventoryCount);
 
+bool cancelOrder(Order orders[], int& orderCount, int orderId, const char* currentDate);
+
 void displayOrders(const Order orders[], int orderCount);
 
 void displaySortedOrders(const Order orders[], int orderCount);
 
-int countOrdersForItem(const Order orders[], int orderCount, const char* itemName);
+int countOrdersForItemToday(const Order orders[], int orderCount, const char* currentDate, const char* itemName);
 
 #endif

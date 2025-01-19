@@ -105,6 +105,39 @@ bool addOrder(Order orders[], int& orderCount, int& nextOrderId, const char* dat
     return true;
 }
 
+bool cancelOrder(Order orders[], int& orderCount, int orderId, const char* currentDate) {
+    if (orderCount == 0) {
+        cout << "No orders available to cancel.\n";
+        return false;
+    }
+
+    int index = -1;
+
+    for (int i = 0; i < orderCount; i++) {
+        if (orders[i].orderId == orderId && strcmp(orders[i].date, currentDate) == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Order with ID " << orderId << " was not found or is not from today.\n";
+        return false;
+    }
+
+    cout << "Cancelling order with ID: " << orders[index].orderId << " (" << orders[index].itemName << ")\n";
+
+    for (int i = index; i < orderCount - 1; i++) {
+        orders[i] = orders[i + 1];
+    }
+    orderCount--;
+
+    saveOrders("orders.txt", orders, orderCount);
+
+    cout << "Order with ID " << orderId << " has been successfully canceled.\n";
+    return true;
+}
+
 void displayOrders(const Order orders[], int orderCount) {
     cout << "\nOrders:\n";
     cout << "ID\tDate\t\tItem\t\tQuantity\tTotal Price\n";
@@ -137,13 +170,15 @@ void displaySortedOrders(const Order orders[], int orderCount) {
     displayOrders(sortedOrders, orderCount);
 }
 
-int countOrdersForItem(const Order orders[], int orderCount, const char* itemName) {
+int countOrdersForItemToday(const Order orders[], int orderCount, const char* currentDate, const char* itemName) {
     int count = 0;
+
     for (int i = 0; i < orderCount; i++) {
-        if (strcmp(orders[i].itemName, itemName) == 0) {
-            count++;
+        if (strcmp(orders[i].date, currentDate) == 0 && strcmp(orders[i].itemName, itemName) == 0) {
+            count += orders[i].quantity;
         }
     }
+
     return count;
 }
 

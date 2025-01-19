@@ -17,7 +17,7 @@ bool deductFromInventory(InventoryItem inventory[], int itemCount, const char* p
 
 bool addToInventory(InventoryItem inventory[], int& itemCount, const char* productName, int quantity);
 
-void displayMinimalInventory(const InventoryItem inventory[], int itemCount, int minimalQuantity);
+bool removeFromInventory(InventoryItem inventory[], int& itemCount, const char* productName);
 
 void displayInventory(const InventoryItem inventory[], int itemCount);
 

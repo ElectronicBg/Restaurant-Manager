@@ -16,6 +16,8 @@ void saveMenu(const char* filename, MenuItem menu[], int menuCount);
 
 bool addMenuItem(MenuItem menu[], int& menuCount, int& nextMenuId, Recipe recipes[], int& recipeCount);
 
+bool deleteMenuItem(MenuItem menu[], int& menuCount, int idToDelete, Recipe recipes[], int& recipeCount);
+
 void displayMenu(MenuItem menu[], int menuCount);
 
 #endif 

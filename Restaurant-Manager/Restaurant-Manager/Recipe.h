@@ -16,6 +16,9 @@ bool canPrepareItem(const Recipe& recipe, int quantity, struct InventoryItem inv
 
 void deductIngredients(const Recipe& recipe, int quantity, struct InventoryItem inventory[], int inventoryCount);
 
+bool deleteRecipe(Recipe recipes[], int& recipeCount, const char* itemName);
+
 void saveRecipes(const char* filename, Recipe recipes[], int recipeCount);
+
 
 #endif
