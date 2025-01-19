@@ -127,7 +127,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DateManager.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Orders.cpp" />
+    <ClCompile Include="Recipe.cpp" />
     <ClCompile Include="Restaurant-Manager.cpp" />
+    <ClCompile Include="Turnover.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="Validator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="DateManager.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Orders.h" />
+    <ClInclude Include="Recipe.h" />
+    <ClInclude Include="Turnover.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="Validator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
