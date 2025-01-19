@@ -53,7 +53,7 @@ cd restaurant-manager
 
 ### **Compile the program:**
 ```sh
-g++ -o restaurant_manager main.cpp Menu.cpp Orders.cpp Inventory.cpp Turnover.cpp Validator.cpp DateManager.cpp UI.cpp -std=c++11
+g++ -o restaurant_manager main.cpp Menu.cpp Orders.cpp Inventory.cpp Turnover.cpp Validator.cpp DateManager.cpp Recipe.cpp UI.cpp -std=c++11
 ```
 
 ### **Run the program:**
@@ -73,6 +73,7 @@ g++ -o restaurant_manager main.cpp Menu.cpp Orders.cpp Inventory.cpp Turnover.cp
  ┣ 📜 Turnover.h/.cpp  # Manages daily turnover reports
  ┣ 📜 Validator.h/.cpp # Input validation functions
  ┣ 📜 DateManager.h/.cpp # Handles date tracking and incrementation
+ ┣ 📜 Recipe.h/.cpp    # Manages recipe storage and processing
  ┣ 📜 UI.h/.cpp        # Manages user interface interactions
  ┣ 📜 Constants.h      # Stores constant values for the program
  ┣ 📜 README.md        # Project documentation
@@ -80,6 +81,7 @@ g++ -o restaurant_manager main.cpp Menu.cpp Orders.cpp Inventory.cpp Turnover.cp
  ┣ 📜 orders.txt       # Stores past orders
  ┣ 📜 inventory.txt    # Stores inventory data
  ┣ 📜 turnover.txt     # Stores daily turnover records
+ ┣ 📜 recipes.txt      # Stores recipe information
 ```
 
 ---
@@ -96,7 +98,6 @@ g++ -o restaurant_manager main.cpp Menu.cpp Orders.cpp Inventory.cpp Turnover.cp
 
 ## **📜 License**
 This project is licensed under the **GNU General Public License GPLv3 or higher** - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 **⭐ If you like this project, consider giving it a star on GitHub!** 🚀

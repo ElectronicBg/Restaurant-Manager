@@ -1,6 +1,19 @@
+/**
+*
+* Solution to course project # 1
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2024/2025
+*
+* @author Emil Neshkov
+* @idnumber 0MI0600506
+* @compiler VC
+*
+* Header: Manages user interface interactions
+*
+*/
+
 #include "UI.h"
-#include "DateManager.h"
-#include "Validator.h"
 
 #include <iostream>
 #include <string>

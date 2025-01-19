@@ -7,20 +7,8 @@
       "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\UI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Turnover.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\Turnover.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Recipe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\Recipe.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Orders.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\Orders.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\Menu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\UI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9475D45B-CC79-495F-8743-809BE8DAE5BA}|Restaurant-Manager\\Restaurant-Manager.vcxproj|solutionrelative:Restaurant-Manager\\UI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -40,61 +28,22 @@
               "RelativeDocumentMoniker": "Restaurant-Manager\\UI.cpp",
               "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\UI.cpp",
               "RelativeToolTip": "Restaurant-Manager\\UI.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-19T14:35:20.835Z",
+              "WhenOpened": "2025-01-19T20:17:23.657Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Turnover.cpp",
-              "DocumentMoniker": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Turnover.cpp",
-              "RelativeDocumentMoniker": "Restaurant-Manager\\Turnover.cpp",
-              "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Turnover.cpp",
-              "RelativeToolTip": "Restaurant-Manager\\Turnover.cpp",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAAI8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-19T14:34:22.968Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Recipe.cpp",
-              "DocumentMoniker": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Recipe.cpp",
-              "RelativeDocumentMoniker": "Restaurant-Manager\\Recipe.cpp",
-              "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Recipe.cpp",
-              "RelativeToolTip": "Restaurant-Manager\\Recipe.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAIMAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-19T14:33:07.812Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Orders.cpp",
-              "DocumentMoniker": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Orders.cpp",
-              "RelativeDocumentMoniker": "Restaurant-Manager\\Orders.cpp",
-              "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Orders.cpp",
-              "RelativeToolTip": "Restaurant-Manager\\Orders.cpp",
-              "ViewState": "AgIAALcAAAAAAAAAAAAAAM0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-19T14:31:39.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Menu.cpp",
-              "DocumentMoniker": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Menu.cpp",
-              "RelativeDocumentMoniker": "Restaurant-Manager\\Menu.cpp",
-              "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\Menu.cpp",
-              "RelativeToolTip": "Restaurant-Manager\\Menu.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-01-19T14:30:17.127Z",
+              "Title": "UI.h",
+              "DocumentMoniker": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\UI.h",
+              "RelativeDocumentMoniker": "Restaurant-Manager\\UI.h",
+              "ToolTip": "D:\\random things\\Visual Studio Projects\\Restaurant-Manager\\Restaurant-Manager\\Restaurant-Manager\\UI.h",
+              "RelativeToolTip": "Restaurant-Manager\\UI.h",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-01-19T20:17:18.94Z",
               "EditorCaption": ""
             }
           ]

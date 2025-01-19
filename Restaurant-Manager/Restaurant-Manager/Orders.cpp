@@ -1,3 +1,18 @@
+/**
+*
+* Solution to course project # 1
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2024/2025
+*
+* @author Emil Neshkov
+* @idnumber 0MI0600506
+* @compiler VC
+*
+* Header: Manages order processing
+*
+*/
+
 #include "Orders.h"
 
 #include <iostream>
